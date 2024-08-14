@@ -12,11 +12,11 @@ Users can update the coursework and final exam marks for a student by providing 
 Calculate Grades:
 
 Grades are calculated based on the sum of coursework and final exam marks:
-A for total marks >= 90
-B for total marks >= 80
-C for total marks >= 70
-D for total marks >= 60
-F for total marks < 60
+A for total marks >= 70
+B for total marks >= 60
+C for total marks >= 50
+D for total marks >= 40
+F for total marks < 30
 Print Student Details:
 
 A well-formatted table displaying all students with their ID, coursework marks, final exam marks, and grades.
