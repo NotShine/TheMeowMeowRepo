@@ -10,6 +10,8 @@ struct Student {
     float finalExamMark;
 };
 
+
+
 char calculateGrade(float courseworkMark, float finalExamMark) {
     float totalMark = courseworkMark  + finalExamMark ;
     if (totalMark >= 60) return 'A';
@@ -19,26 +21,55 @@ char calculateGrade(float courseworkMark, float finalExamMark) {
     else return 'F';
 }
 
+
+void toUpperCase(std::string &str) {
+    for (char &c : str) {
+        if (c >= 'a' && c <= 'z') {
+            c = c - 'a' + 'A';
+        }
+    }
+}
+
 void updateStudentMarks(Student students[], int count) {
-    std::string studentID;
+    std::string id;
     std::cout << "Enter the student ID to update: ";
-    std::cin >> studentID;
+    std::cin >> id;
+
+    // Convert input ID to uppercase
+    toUpperCase(id);
 
     bool found = false;
+    bool match = false;
+
     for (int i = 0; i < count; i++) {
-        if (students[i].id == studentID) {
-            found = true;
-            std::cout << "Enter new coursework mark: ";
-            std::cin >> students[i].courseworkMark;
-            std::cout << "Enter new final exam mark: ";
-            std::cin >> students[i].finalExamMark;
-            std::cout << "Marks updated successfully." << std::endl;
-            break;
+        std::string currentId = students[i].id;
+        // Convert current student ID to uppercase
+        toUpperCase(currentId);
+
+        if (id.length() == currentId.length()) {
+            match = true;
+            for (int j = 0; j < id.length(); j++) {
+                // Compare characters directly by checking both possible cases
+                if (id[j] != currentId[j]) {
+                    match = false;
+                    break;
+                }
+            }
+
+            if (match) {
+                found = true;
+                std::cout << "Enter new coursework mark: ";
+                std::cin >> students[i].courseworkMark;
+                std::cout << "Enter new final exam mark: ";
+                std::cin >> students[i].finalExamMark;
+                std::cout << "Marks updated successfully.\n";
+                break;
+            }
         }
     }
 
     if (!found) {
-        std::cout << "Student ID not found." << std::endl;
+        std::cout << "Student ID not found.\n";
     }
 }
 
